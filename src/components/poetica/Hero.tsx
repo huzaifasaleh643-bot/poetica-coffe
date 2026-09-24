@@ -16,19 +16,15 @@ function Counter({ value, suffix = "", pad = 0, started }: CounterProps) {
   useEffect(() => {
     if (!started) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      setDisplayValue(value);
-      return;
-    }
-
-    const duration = 4000;
+    const duration = 35000;
     const startTime = performance.now();
     let frameId = 0;
 
     const tick = (now: number) => {
       const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+      const eased = progress < 0.5
+        ? 2 * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
       setDisplayValue(Math.round(value * eased));
       if (progress < 1) frameId = requestAnimationFrame(tick);
     };
