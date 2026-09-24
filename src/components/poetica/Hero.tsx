@@ -22,7 +22,7 @@ function Counter({ value, suffix = "", pad = 0, started }: CounterProps) {
       return;
     }
 
-    const duration = 20000;
+    const duration = 4000;
     const startTime = performance.now();
     let frameId = 0;
 
