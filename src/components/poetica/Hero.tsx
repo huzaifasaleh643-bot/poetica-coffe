@@ -16,7 +16,7 @@ function Counter({ value, suffix = "", pad = 0, started }: CounterProps) {
   useEffect(() => {
     if (!started) return;
 
-    const duration = 35000;
+    const duration = 12000;
     const startTime = performance.now();
     let frameId = 0;
 
