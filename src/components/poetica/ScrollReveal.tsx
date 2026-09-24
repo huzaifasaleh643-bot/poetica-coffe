@@ -5,12 +5,6 @@ import { useEffect } from "react";
 export function ScrollReveal() {
   useEffect(() => {
     const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reduceMotion) {
-      elements.forEach((element) => element.setAttribute("data-revealed", "true"));
-      return;
-    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -22,7 +16,7 @@ export function ScrollReveal() {
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+      { threshold: 0.1, rootMargin: "0px 0px -5% 0px" },
     );
 
     elements.forEach((element) => observer.observe(element));
